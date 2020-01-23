@@ -21,32 +21,55 @@ const questions = [
     message: "Enter your favorite color"
   }
 ]
+
+// function pdf()
+//       const html = fs.readFileSync('./index.html', 'utf8',);
+//       const options = { format: 'Letter' };
+//       pdf.create(html, options,).toFile(`./${answers}.pdf`, function(err, res) {
+//         if (err) return console.log(err);
+//          console.log(res);  //{ filename: 'Resume.pdf' }
+//       });
+
 function gitCall(answers) {
   name = answers.name
   const queryURL = `https://api.github.com/users/${name}`
   axios.get(queryURL)
   .then(function(response) {
+    fs.writeFile('index.html', generateHTML(response), function(err) {
+          if (err) console.log('error', err)
+           console.log(response);
 
-      const html = fs.writeFileSync("index.html", generateHTML(response));
-      var options = { format: 'Letter' };
-      pdf.create(html, options).toFile('C:\Users\Robert Odion\Desktop\DeveloperProfileGenerator\pdf', function(err, res) {
-        if (err) return console.log(err);
-        console.log(res);  { filename: '"Resume".pdf' }
-      });
+  const html = fs.readFileSync('index.html', 'utf8'); //to your html file
+  const options = { format: 'Letter' };
+   //in your case just your html code in place of html
+       //pdf.create(<html><div>test</div></html>,.....)
+  pdf.create(html, options).toFile('./resume.pdf', function(err, res) {
+    if (err) return console.log(err);
+    console.log(res); // { filename: '/genrateddoc.pdf' } 
+  });    
+    });
     
-   })
+  })
+  
 
-  //  fs.writeFile("index.html", generateHTML(response), function(err) {
-  //  var html = fs.readFileSync('./test/businesscard.html', 'utf8');
-  //  if (err) console.log('error', err);
-  //    console.log(response)
-   
-    
-   
-  //  pdf.create(html, options).toFile('./name.pdf', function(err, res) {
-  //   if (err) return console.log(err);
-  //   console.log(res); // { filename: '/app/businesscard.pdf' }
-  // });
+  //  function gitCall(answers) {
+  //   let name = answers.name
+  //   const queryURL = `https://api.github.com/users/${name}`
+  //   axios.get(queryURL).then(function(response) {
+  //       fs.writeFile("index.html", generateHTML(response), function(err, answers) {
+  //     if (err) console.log('error', err);
+  //      console.log(response)
+  //    })
+
+  //  function createPDF(uDataUser) {
+  //   const html = fs.readFileSync('./prof.html', 'utf8');
+  //   const options = { format: 'Letter' };
+  //   pdf.create(html, options).toFile(`./${uDataUser}.pdf`, function(err, res) {
+  //     if (err) return console.log(err);
+  //     // console.log(res)
+  //     console.log(`PDF ${uDataUser} Written to Disk`); // { filename: '/app/businesscard.pdf' }
+  //   });
+  // }
 
   
    .catch(function (error) {
@@ -58,6 +81,10 @@ function gitCall(answers) {
 }
 
 
+  
+
+    
+   
 
   
 inquirer.prompt(questions)
@@ -65,7 +92,7 @@ inquirer.prompt(questions)
     // console.log(JSON.stringify(answers, null, '  '))
     // console.log(answers.name)
     gitCall(answers)
-    // userMap(answers)
+    //createPDF()
     user=answers
   })
   .catch(function(err) {
