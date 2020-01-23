@@ -1,0 +1,26 @@
+{
+  "name": "developerprofilegenerator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Odianrobert/DeveloperProfileGenerator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Odianrobert/DeveloperProfileGenerator/issues"
+  },
+  "homepage": "https://github.com/Odianrobert/DeveloperProfileGenerator#readme",
+  "dependencies": {
+    "axios": "^0.19.1",
+    "fs": "0.0.1-security",
+    "html-pdf": "^2.2.0",
+    "inquirer": "^7.0.3",
+    "util": "^0.12.1"
+  }
+}
